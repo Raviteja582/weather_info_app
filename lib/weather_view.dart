@@ -15,15 +15,30 @@ class _WeatherScreenState extends State<WeatherScreen> {
   String temperature = '--';
   String weatherCondition = '--';
 
+  IconData getWeatherIcon(String condition) {
+    switch (condition) {
+      case 'Sunny':
+        return Icons.wb_sunny;
+      case 'Cloudy':
+        return Icons.cloud;
+      case 'Rainy':
+        return Icons.umbrella;
+      default:
+        return Icons.help_outline; // Default icon if condition doesn't match
+    }
+  }
+
   void fetchWeather() {
     setState(() {
       cityName = _cityController.text;
+      _cityController.clear();
+      if (cityName.isNotEmpty) {
+        int temp = Random().nextInt(16) + 15;
+        temperature = '$temp°C';
 
-      int temp = Random().nextInt(16) + 15;
-      temperature = '$temp°C';
-
-      List<String> conditions = ['Sunny', 'Cloudy', 'Rainy'];
-      weatherCondition = conditions[Random().nextInt(3)];
+        List<String> conditions = ['Sunny', 'Cloudy', 'Rainy'];
+        weatherCondition = conditions[Random().nextInt(3)];
+      }
     });
   }
 
@@ -64,10 +79,19 @@ class _WeatherScreenState extends State<WeatherScreen> {
               style: const TextStyle(fontSize: 20),
             ),
             const SizedBox(height: 8),
-            Text(
-              'Condition: $weatherCondition',
-              textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  getWeatherIcon(weatherCondition),
+                  size: 24,
+                ),
+                const SizedBox(width: 8),
+                Text(
+                  weatherCondition,
+                  style: const TextStyle(fontSize: 20),
+                ),
+              ],
             ),
           ],
         ),
