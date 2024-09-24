@@ -36,8 +36,8 @@ class _WeatherScreenState extends State<WeatherScreen> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             TextField(
               controller: _cityController,
@@ -54,16 +54,19 @@ class _WeatherScreenState extends State<WeatherScreen> {
             const SizedBox(height: 32),
             Text(
               'City: $cityName',
+              textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
             Text(
               'Temperature: $temperature',
+              textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 20),
             ),
             const SizedBox(height: 8),
             Text(
               'Condition: $weatherCondition',
+              textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 20),
             ),
           ],
