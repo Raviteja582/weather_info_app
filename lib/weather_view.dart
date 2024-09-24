@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 
 class WeatherScreen extends StatefulWidget {
@@ -17,9 +18,12 @@ class _WeatherScreenState extends State<WeatherScreen> {
   void fetchWeather() {
     setState(() {
       cityName = _cityController.text;
-      // Simulating a weather fetch. Replace this with actual API call.
-      temperature = '25°C'; // Example temperature
-      weatherCondition = 'Sunny'; // Example weather condition
+
+      int temp = Random().nextInt(16) + 15;
+      temperature = '$temp°C';
+
+      List<String> conditions = ['Sunny', 'Cloudy', 'Rainy'];
+      weatherCondition = conditions[Random().nextInt(3)];
     });
   }
 
@@ -35,7 +39,6 @@ class _WeatherScreenState extends State<WeatherScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // TextField for city input
             TextField(
               controller: _cityController,
               decoration: const InputDecoration(
@@ -44,13 +47,11 @@ class _WeatherScreenState extends State<WeatherScreen> {
               ),
             ),
             const SizedBox(height: 16),
-            // Fetch Weather Button
             ElevatedButton(
               onPressed: fetchWeather,
               child: const Text('Fetch Weather'),
             ),
             const SizedBox(height: 32),
-            // Placeholders for Weather Data
             Text(
               'City: $cityName',
               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
